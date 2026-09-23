@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNM Cleaning Services | Port Moresby</title>
+<style>
+  :root {
+    --green: #2f9e44;
+    --teal: #0b7285;
+    --dark: #16181c;
+    --light-bg: #f7f9f8;
+    --card-bg: #ffffff;
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--light-bg);
+    color: var(--dark);
+    line-height: 1.55;
+    font-size: 17px;
+  }
+  header {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  header img.logo-img { height: 46px; }
+  .menu-btn {
+    background: none;
+    border: none;
+    font-size: 1.9rem;
+    cursor: pointer;
+    color: var(--dark);
+    padding: 8px;
+  }
+  nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 12px rgba(0,0,0,0.15);
+    padding: 24px;
+    transition: right 0.25s ease;
+    z-index: 200;
+  }
+  nav.open { right: 0; }
+  nav a {
+    display: block;
+    padding: 16px 4px;
+    border-bottom: 1px solid #eee;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .nav-close {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    float: right;
+    cursor: pointer;
+  }
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 150;
+  }
+  .overlay.open { display: block; }
+
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 64px 20px 40px;
+    background-image: linear-gradient(180deg, rgba(10,30,20,0.55), rgba(10,40,35,0.75)), url('images/hero-window-cleaning.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+  .hero h1 { font-size: 2rem; font-weight: 800; margin-bottom: 12px; text-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+  .hero p { font-size: 1.1rem; opacity: 0.97; margin-bottom: 26px; }
+
+  .btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #25D366;
+    color: #fff;
+    padding: 16px 28px;
+    border-radius: 32px;
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 1.05rem;
+    min-height: 48px;
+    line-height: 1.2;
+  }
+  .btn-whatsapp svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px;
+    font-size: 0.95rem;
+    border: 2px solid var(--teal);
+    color: var(--teal);
+    border-radius: 32px;
+    text-decoration: none;
+    font-weight: 800;
+    min-height: 48px;
+    width: 100%;
+  }
+  .btn-outline svg { width: 18px; height: 18px; fill: var(--teal); flex-shrink: 0; }
+
+  .quick-actions {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 18px 14px;
+    background: #fff;
+    margin: -22px 14px 0;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 5;
+  }
+  .quick-actions a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: var(--dark);
+    padding: 10px 4px;
+    border-radius: 12px;
+    min-height: 64px;
+    justify-content: center;
+  }
+  .quick-actions a:active { background: #f0f4f2; }
+  .quick-actions .qa-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--light-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+  .quick-actions .qa-icon svg { width: 20px; height: 20px; fill: #25D366; }
+  .quick-actions .qa-label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  section { padding: 40px 18px; }
+  section h2 {
+    font-size: 1.55rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--teal);
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  @media (min-width: 640px) {
+    .card-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 960px) {
+    .card-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+  .card-photo {
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+  }
+  .card-body { padding: 20px; }
+  .card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 8px; color: var(--dark); }
+  .card .price {
+    font-weight: 800;
+    color: var(--green);
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .card ul { list-style: none; margin: 10px 0 18px; }
+  .card ul li { font-size: 0.98rem; padding: 5px 0; color: #333; }
+  .card ul li::before { content: "\2713  "; color: var(--green); font-weight: 800; }
+  .card p.desc { font-size: 0.98rem; color: #444; margin-bottom: 16px; }
+  .card .btn-whatsapp { width: 100%; }
+  .badge-gold { border: 3px solid #d4af37; }
+
+  .team-section {
+    background: #fff;
+    text-align: center;
+  }
+  .team-photo {
+    width: 100%;
+    max-width: 560px;
+    border-radius: var(--radius);
+    margin: 0 auto 18px;
+    display: block;
+  }
+  .team-section p { font-size: 1.02rem; color: #444; max-width: 560px; margin: 0 auto; }
+
+  .trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    padding: 30px 18px;
+    background: var(--light-bg);
+  }
+  .trust-item {
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-align: center;
+    width: 46%;
+    color: var(--dark);
+  }
+
+  footer {
+    background: var(--dark);
+    color: #eee;
+    padding: 36px 20px;
+    text-align: center;
+    font-size: 0.98rem;
+  }
+  footer img { height: 40px; margin-bottom: 14px; }
+  footer a {
+    color: #9fe6b3;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+  }
+  footer a svg { width: 16px; height: 16px; fill: #9fe6b3; }
+  footer p { margin: 5px 0; }
+
+  .fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.28);
+    z-index: 300;
+    text-decoration: none;
+  }
+  .fab svg { width: 30px; height: 30px; fill: #fff; }
+</style>
+</head>
+<body>
+
+<header>
+  <img class="logo-img" src="images/logo.png" alt="SNM Cleaning Services">
+  <button class="menu-btn" onclick="toggleNav()">&#9776;</button>
+</header>
+
+<div class="overlay" id="overlay" onclick="toggleNav()"></div>
+<nav id="nav">
+  <button class="nav-close" onclick="toggleNav()">&times;</button>
+  <a href="#packages">Packages</a>
+  <a href="#services">Services</a>
+  <a href="#team">Our Team</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<div class="hero">
+  <h1>Creating Cleaner Spaces, Healthier Lives</h1>
+  <p>Residential &amp; commercial cleaning across Port Moresby</p>
+  <a class="btn-whatsapp" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20book%20a%20cleaning%20service">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+    Book on WhatsApp
+  </a>
+</div>
+
+<div class="quick-actions">
+  <a href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20book%20a%20cleaning%20service">
+    <span class="qa-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg></span>
+    <span class="qa-label">Book Now</span>
+  </a>
+  <a href="#packages">
+    <span class="qa-icon">&#11088;</span>
+    <span class="qa-label">Packages</span>
+  </a>
+  <a href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20request%20a%20quote">
+    <span class="qa-icon">&#128203;</span>
+    <span class="qa-label">Get a Quote</span>
+  </a>
+  <a href="tel:79030402">
+    <span class="qa-icon">&#128222;</span>
+    <span class="qa-label">Call Us</span>
+  </a>
+</div>
+
+<section id="packages">
+  <h2>Regular Cleaning Packages</h2>
+  <div class="card-grid">
+
+    <div class="card">
+      <div class="card-body">
+        <h3>Bronze Package</h3>
+        <div class="price">PGK 250/week</div>
+        <ul>
+          <li>General dusting</li>
+          <li>Vacuuming</li>
+          <li>Mopping</li>
+          <li>Bathroom cleaning</li>
+          <li>Kitchen surface cleaning</li>
+        </ul>
+        <a class="btn-whatsapp" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20book%20the%20Bronze%20Package">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Book on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h3>Silver Package</h3>
+        <div class="price">PGK 450/week</div>
+        <ul>
+          <li>Everything in Bronze</li>
+          <li>Window cleaning</li>
+          <li>Appliance exterior cleaning</li>
+          <li>Deep bathroom sanitization</li>
+        </ul>
+        <a class="btn-whatsapp" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20book%20the%20Silver%20Package">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Book on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="card badge-gold">
+      <div class="card-body">
+        <h3>Gold Package</h3>
+        <div class="price">PGK 750/week</div>
+        <ul>
+          <li>Everything in Silver</li>
+          <li>Carpet cleaning</li>
+          <li>Upholstery cleaning</li>
+          <li>Full kitchen deep clean</li>
+          <li>Priority booking</li>
+        </ul>
+        <a class="btn-whatsapp" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20book%20the%20Gold%20Package">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Book on WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="card-grid">
+
+    <div class="card">
+      <img class="card-photo" src="images/residential-cleaning.jpg" alt="Residential cleaning">
+      <div class="card-body">
+        <h3>Residential Cleaning</h3>
+        <p class="desc">Regular, deep, move-in/move-out, spring cleaning, kitchens, bathrooms, carpets, windows and more.</p>
+        <a class="btn-whatsapp" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20enquire%20about%20Residential%20Cleaning">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Book on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-photo" src="images/commercial-cleaning.jpg" alt="Commercial cleaning">
+      <div class="card-body">
+        <h3>Commercial Cleaning</h3>
+        <p class="desc">Offices, retail stores, restaurants, banks, churches and community halls.</p>
+        <a class="btn-whatsapp" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20enquire%20about%20Commercial%20Cleaning">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Book on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-photo" src="images/outdoor-pressure-wash.jpg" alt="Outdoor pressure washing">
+      <div class="card-body">
+        <h3>Outdoor Cleaning</h3>
+        <p class="desc">Pressure washing, driveways, roofs, gutters, solar panels, car parks and building exteriors.</p>
+        <a class="btn-whatsapp" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20enquire%20about%20Outdoor%20Cleaning">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Book on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h3>Specialized Cleaning</h3>
+        <p class="desc">Carpet shampooing, high-rise windows, floor stripping/waxing, mold removal, disinfection, graffiti removal.</p>
+        <a class="btn-whatsapp" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20enquire%20about%20Specialized%20Cleaning">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Book on WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h3>Schools, Hospitals, Hotels &amp; Factories</h3>
+        <p class="desc">Custom cleaning programs for large or specialized facilities. Site inspection required — pricing by quote.</p>
+        <a class="btn-outline" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20request%20a%20quote%20for%20our%20facility.%20Property%20type%3A%20___%20Size%3A%20___%20Preferred%20date%3A%20___">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Request a Quote
+        </a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h3>Construction &amp; Industrial Cleaning</h3>
+        <p class="desc">Post-construction cleanup, factory cleaning, workshop and warehouse cleaning. Pricing by quote.</p>
+        <a class="btn-outline" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20request%20a%20quote%20for%20a%20construction%2Findustrial%20job.%20Site%3A%20___%20Scope%3A%20___">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+          Request a Quote
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="team-section" id="team">
+  <h2>Meet Our Team</h2>
+  <img class="team-photo" src="images/team-photo.jpg" alt="SNM Cleaning Services team">
+  <p>Trained, reliable and professional — our team is ready to bring the SNM standard to your home or business.</p>
+</section>
+
+<div class="trust-row">
+  <div class="trust-item">&#127775; Free Site Inspection</div>
+  <div class="trust-item">&#128203; Free Quotations</div>
+  <div class="trust-item">&#128260; Flexible Scheduling</div>
+  <div class="trust-item">&#127793; Eco-Friendly Options</div>
+</div>
+
+<footer id="contact">
+  <img src="images/logo.png" alt="SNM Cleaning Services">
+  <p><strong>SNM Cleaning Services</strong></p>
+  <p>Port Moresby, Papua New Guinea</p>
+  <p>Phone: 79030402</p>
+  <p><a href="https://wa.me/61401815863">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+    WhatsApp us
+  </a></p>
+  <p>&copy; 2026 SNM Cleaning Services</p>
+</footer>
+
+<a class="fab" href="https://wa.me/61401815863?text=Hi%20SNM%20Cleaning%2C%20I%27d%20like%20to%20book%20a%20cleaning%20service">
+  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.36 5.07L2 22l5.1-1.33A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.45-4.37-1.24l-.31-.18-3.03.79.81-2.95-.2-.32A7.94 7.94 0 014 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+</a>
+
+<script>
+  function toggleNav() {
+    document.getElementById('nav').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
